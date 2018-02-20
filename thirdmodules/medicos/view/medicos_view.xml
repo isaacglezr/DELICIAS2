@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="medicos_form_view">
+            <field name="name">medicos.form</field>
+            <field name="model">medico.delicias</field>
+            <field name="arch" type="xml">
+                <form string="Medicos">
+                    <group>
+                        <field name="name"/>
+                        <field name="x_Especialidad"/>
+                        <field name="x_movil"/>
+                    </group>                  
+                </form>
+            </field>
+        </record>
+
+    	<record model="ir.ui.view" id="medicos_tree_view">
+            <field name="name">medicos.tree.view</field>
+            <field name="model">medico.delicias</field>
+            <field name="arch" type="xml">
+                <tree string="Medicos">
+                   <field name="name"/>
+                   <field name="x_Especialidad"/>
+                   <field name="x_movil"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

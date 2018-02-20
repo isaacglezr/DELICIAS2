@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Add instructor field to existing view -->
+        <record model="ir.ui.view" id="partner_fields_view">
+            <field name="name">partner.fields</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+		<xpath expr="//field[@name='website']" position="after">
+                        <field name="x_NumExpediente" placeholder="Numero de Expediente del Paciente"/>
+                </xpath>
+		<xpath expr="//field[@name='email']" position="after">
+                        <field name="x_Edad"/>
+                </xpath>
+		<notebook position="inside">
+		    <page string="Historial Clinico">
+			<field name="x_Historial" widget="many2many">
+			    <tree>
+				<field name="x_FechaEntrada"/>
+				<field name="x_FechaSalida"/>
+				<field name="x_Doctor"/>
+				<field name="state"/>
+				<field name="x_Diagnostico"/>
+			    </tree>
+			</field>
+		    </page>
+		</notebook>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="contact_list_action">
+            <field name="name">Contacts</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+        <menuitem id="contact_menu" name="Contactos"
+                  parent="pacientes_menu"
+                  action="contact_list_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="course_form_view">
+            <field name="name">pacientedelicias.form</field>
+            <field name="model">pacientes.delicias</field>
+            <field name="arch" type="xml">
+                <form string="Pacientes Form">
+                    <sheet>
+                        <group>
+                            <field name="name" domain="[('customer','=',True)]"/>
+                            <field name="x_FechaEntrada"/>
+                            <field name="x_Expediente"/>
+                            <field name="x_Doctor"/>
+
+                        </group>
+                        <notebook>
+                            <page string="Medicamento/Material">
+                                <field name="x_MediMaterial"/>
+                            </page>
+                            <page string="Asignacion">
+                                <group>
+                                    <field name="x_Habitacion"/>
+                                    <field name="x_name" domain="[('x_Disponible','=',False)]" attrs="{'invisible':[('x_Habitacion','=',False)]}"/>                            
+				    <field name="x_ExistenciaH" domain="[('location_id','=',39)]" attrs="{'invisible':[('x_Habitacion','=',False)]}"/>
+				</group>
+                                
+                                <group>
+                                    <field name="x_Quirofano"/>
+                                    <field name="x_NumQuirofano" domain="[('x_Disponible','=',False)]" attrs="{'invisible':[('x_Quirofano','=',False)]}"/>                            
+				    <field name="x_ExistenciaQ" domain="[('location_id','=',45)]" atrrs="{'invisible':[('x_Quirofano','=',False)]}"/>
+                                </group>
+                            </page>                            
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="course_tree_view">
+            <field name="name">pacientes.tree.view</field>
+            <field name="model">pacientes.delicias</field>
+            <field name="arch" type="xml">
+                <tree string="Pacientes">
+                    <field name="name"/>
+                    <field name="x_FechaEntrada"/>
+                    <!--<field name="x_FechaSalida" attrs="{'invisible':[('x_Habitacion','=',False)]}"/>-->
+                    <field name="x_Expediente"/>
+                    <field name="x_Doctor"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="pacientes_list_action">
+            <field name="name">Pacientes</field>
+            <field name="res_model">pacientes.delicias</field>
+            <field name="view_type">form</field>
+            <field name="view_model">form,tree</field>
+            <field name="context" eval="{'search_default_mis_pacientes': 1}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea una nueva historia clinica</p>
+            </field>
+        </record>
+
+            <menuitem id="main_pacientes_menu" name="Pacientes"/>
+
+            <menuitem id="pacientes_menu" name="Modulos" parent="main_pacientes_menu"/>
+
+            <menuitem id="pacientes_menu_menu" name="Pacientes" parent="pacientes_menu" action="pacientes_list_action"/>
+    </data>
+</odoo>
